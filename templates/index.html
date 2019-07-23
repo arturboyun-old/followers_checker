@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get usernames</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>СРАВНИ АУДИТОРИЮ</h1>
+</header>
+
+<section class="input_data">
+<form method="post" action="/output">
+    <label>
+        <input type="text" required placeholder="ВВЕДИ СВОЙ ЛОГИН" name="first_username">
+        <input type="text" required placeholder="ВВЕДИ ЛОГИН" name="second_username">
+    </label>
+    <button type="submit">Сравнить</button>
+</form>
+</section>
+
+{% if usernames %}
+<section class="output">
+    <h3>РЕЗУЛЬТАТ: {{ users_count }}</h3>
+    <div class="usernames">
+        {% for username in usernames %}
+        <a href="https://www.instagram.com/{{ username }}">@{{ username }}</a><br>
+        {% endfor %}
+    </div>
+</section>
+{% elif usernames|length %}
+<section class="output">
+    <h3>Совпадений не найдено</h3>
+</section>
+{% elif show_error %}
+<section class="output">
+    <h3>Ошибка</h3>
+</section>
+{% endif %}
+
+<footer>
+    <h1>ПОДВАЛ</h1>
+</footer>
+
+</body>
+</html>
